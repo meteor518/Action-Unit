@@ -108,9 +108,9 @@ def build_network(name, classes, checkpoint=None, ctx=mx.cpu(), **kwargs):
             symbol_file = checkpoint[:-11] + 'symbol.json'
             net = gluon.SymbolBlock.imports(symbol_file, ['data'], checkpoint, ctx)
         else:
-            symbol_file = os.path.join(os.path.dirname(__file__), '..', '..', 'model',
+            symbol_file = os.path.join(os.path.dirname(__file__), '..', 'model',
                                        'model-y1-test2', 'model-symbol.json')
-            params_file = os.path.join(os.path.dirname(__file__), '..', '..', 'model',
+            params_file = os.path.join(os.path.dirname(__file__), '..', 'model',
                                        'model-y1-test2', 'model-0000.params')
             net = PretrainedModel(classes, symbol_file, params_file, ctx)
             net.output.collect_params().initialize(mx.init.Xavier(), ctx=ctx)
@@ -211,11 +211,11 @@ if __name__ == '__main__':
     parser.add_argument('--freeze-steps', '-fs', type=int, default=0, help='max steps for freezing the params')
     parser.add_argument('--gpu-device', '-gpu', type=int, required=True, nargs='+', help='specify gpu id')
 
-    parser.add_argument('--network', '-net', default='alexnet', help='choose network')
+    parser.add_argument('--network', '-net', default='mobileface', help='choose network')
     parser.add_argument('--max-steps', '-ms', type=int, default=10000, help='max steps for training')
     parser.add_argument('--batch-size', '-bs', type=int, default=128, help='batch size')
     parser.add_argument('--learning-rate', '-lr', type=float, default=0.01, help='initial learning rate')
-    parser.add_argument('--optimizer', '-opt', default='nag', choices=['adam', 'sgd', 'nag'], help='type of optimizer')
+    parser.add_argument('--optimizer', '-opt', default='adam', choices=['adam', 'sgd', 'nag'], help='type of optimizer')
     parser.add_argument('--decay-params', '-dp', nargs=2, type=float, default=[500, 0.8],
                         help='decay step and decay rate of learning rate')
     parser.add_argument('--enable-balance-sampler', '-b', action='store_true',
