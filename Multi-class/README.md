@@ -1,24 +1,4 @@
-# Action Unit
-
-## Introduction
-
-* `AU1`：Inner Brow Raiser（眉毛内角抬起）
-
-* `AU2`：Outer Brow Raiser （眉毛外角抬起）
-* `AU4`：Brow Lowerer（皱眉或降低眉毛）
-* `AU5`：Upper Lid Raiser（上眼睑上升）
-* `AU6`：Cheek Raiser（脸颊提升）
-* `AU9`：Nose Wrinkler（皱鼻）
-* `AU12`：Lip Corner Puller（倾斜向上拉动嘴角）
-* `AU17`：Chin Raiser（下唇向上）
-* `AU20`：Lip stretcher（嘴角拉伸）
-* `AU25`：Lips part（张嘴并指定双唇分离的长度）
-* `AU26`：Jaw Drop（张嘴并指定颌部下降的距离）
-* `AU43`：Eyes Closed（闭眼）
-
-## model
-* model_y1_test2： mobileface的预模型
-* model_v4：以样本数大于50的所有类作为train set，m=0.5，batch_size=512，在insight face alignment处理的图片上训练的模型。
+# Action Unit (Multi-class)
 
 ## data_process: 数据处理
 * count.ipynb：数据类别统计和分类
@@ -26,8 +6,15 @@
 * tsne_feature.ipynb：利用TSNE将特征降维显示
 * acc.py： 计算top-1
 * tprfpr.py： 计算tpr、fpr
+* preprocess.py：数据预处理，将图片和标签读取，保存为Mxnet读取的rec文件
+```shell
+python preprocess.py -i ./images/(It's your imags path) -t ./label.txt(your label file) -rec ./data/train.rec(the output .rec file) -s 112
+```
 
-## src: train code
+## train: train code
+```shell
+python train.py -num 22(类别数) -rec ./data/train.rec -e ./data/eval.rec -o ./output/ -gpu 0
+```
 
 ## Reference
 
